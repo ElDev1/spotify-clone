@@ -1,6 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-import { XRAPIDAPIKEY, BASEURL } from process.env;
+const XRAPIDAPIKEY = import.meta.env.VITE_XRAPIDAPIKEY;
+const BASEURL = import.meta.env.VITE_BASEURL;
+
 
 export const shazamCoreApi = createApi({
     reducerPath: 'shazamCoreApi',
@@ -12,7 +14,7 @@ export const shazamCoreApi = createApi({
         },
     }),
     endpoints: (builder) => ({
-        getTopCharts: builder.query({ query: '/charts/world'}),
+        getTopCharts: builder.query({ query: () => '/charts/world'}),
     }),
 });
 
