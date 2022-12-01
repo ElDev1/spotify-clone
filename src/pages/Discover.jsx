@@ -10,7 +10,7 @@ const Discover = () => {
     const { activeSong, isPlaying, genreListId } = useSelector((state) => state.player);
 
     const { data, isFetching, error } = useGetSongsByGenreQuery(genreListId || "POP")
-    const demoGenre = 'pop'
+    const genreTitle = genres.find(({ value }) => value === genreListId)?.title;
 
     if (isFetching) return <Loader title='Loading songs' />
     if (error) return <Error />
@@ -19,7 +19,7 @@ const Discover = () => {
         <div className="flex flex-col">
             <div className="w-full flex justify-between items-center
             sm:flex-row flex-col mt-4 mb-10">
-                <h2 className="font-bold text-exl text-white text-left">Discover {demoGenre}</h2>
+                <h2 className="font-bold text-exl text-white text-left">Discover {genreTitle}</h2>
                 <select
                     onChange={(e) => dispatch(selectGenreListId(e.target.value))}
                     value={genreListId || "pop"}
